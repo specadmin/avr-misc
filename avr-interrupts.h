@@ -1,5 +1,5 @@
-#ifndef INTERRUPTS_H
-#define INTERRUPTS_H
+#ifndef AVR_MISC_INTERRUPTS_H
+#define AVR_MISC_INTERRUPTS_H
 //-----------------------------------------------------------------------------
 #include <avr/interrupt.h>
 //-----------------------------------------------------------------------------
