@@ -5,7 +5,8 @@
 #define nop() __asm__ volatile ("nop")
 #define halt() while(1);
 //-----------------------------------------------------------------------------
-#define FALSE    0
+#define _0      0
+#define FALSE   0
 #define TRUE    1
 #define KB      1024
 #define MB      1048576ULL

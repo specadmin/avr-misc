@@ -1,7 +1,6 @@
 #ifndef MACRO_H
 #define MACRO_H
 //-----------------------------------------------------------------------------
-#define _0 0
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
 #define CAT(x,y) x ## y
