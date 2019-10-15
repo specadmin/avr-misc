@@ -5,8 +5,12 @@
 #define nop() __asm__ volatile ("nop")
 #define halt() while(1);
 //-----------------------------------------------------------------------------
+#define FALSE    0
+#define TRUE    1
 #define KB      1024
 #define MB      1048576ULL
+#define KHZ     1000
+#define MHZ     1000000ULL
 //-----------------------------------------------------------------------------
 typedef unsigned char BYTE;
 typedef unsigned int WORD;
