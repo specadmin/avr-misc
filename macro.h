@@ -32,7 +32,7 @@
 #define clr_bit(reg,b) (reg&=~_bit(b))
 #define set_bits(reg,bit,...) reg = reg | _bit(bit) _BITS(__VA_ARGS__)
 #define clr_bits(reg,bit,...) reg = reg & ~(_bit(bit) _BITS(__VA_ARGS__))
-#define test_bits(var,bits) ((var & (bits)) ? 1 : 0)
+#define test_bits(var,bits) (((var & (bits)) == (bits)) ? 1 : 0)
 
 #define HBYTE(word) ((word)>>8)
 #define LBYTE(word) ((BYTE)(word))
