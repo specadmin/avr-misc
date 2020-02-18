@@ -2,6 +2,7 @@
 #define AVR_MISC_COMMON_H
 //-----------------------------------------------------------------------------
 #define __inline inline __attribute__ ((always_inline))
+#define __unused __attribute__ ((unused))
 #define nop() __asm__ volatile ("nop")
 #define halt() while(1);
 //-----------------------------------------------------------------------------
