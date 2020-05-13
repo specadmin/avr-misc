@@ -6,5 +6,6 @@
 #include "avr-common.h"
 #include "avr-interrupts.h"
 #include "avr-delay.h"
+#include "avr-eeprom.h"
 //-----------------------------------------------------------------------------
 #endif
