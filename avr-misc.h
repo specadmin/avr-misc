@@ -8,4 +8,19 @@
 #include "avr-delay.h"
 #include "avr-eeprom.h"
 //-----------------------------------------------------------------------------
+class BYTEstack
+{
+public:
+    BYTEstack();
+    ~BYTEstack();
+    void push(BYTE value);
+    BYTE pop();
+    BYTE size();
+    BYTE top();
+    BYTE operator [](const int i);
+private:
+    BYTE m_count;
+    BYTE* m_buf;
+};
+//-----------------------------------------------------------------------------
 #endif
