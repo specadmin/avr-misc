@@ -1,210 +1,220 @@
 //-----------------------------------------------------------------------------
 #include "avr-common.h"
 #include "avr-eeprom.h"
-#include <avr/eeprom.h>
+
+
 //=============================================================================
 //===============================  EEBYTE  ====================================
 //=============================================================================
-void EEBYTE::operator = (const BYTE new_value)
+void _EEBYTE::operator = (const _EEBYTE& new_value)
 {
-    eeprom_write_byte(&address, new_value);
+    BYTE tmp = eeprom_read_byte(&new_value.data);
+    eeprom_write_byte(&data, tmp);
 }
 //-----------------------------------------------------------------------------
-void EEBYTE::operator = (const int& new_value)
+_EEBYTE* _EEBYTE::operator & ()
 {
-    eeprom_write_byte(&address, (BYTE) new_value);
+    return (_EEBYTE*) &data;
 }
 //-----------------------------------------------------------------------------
-void EEBYTE::operator = (const EEBYTE& new_value)
+_EEBYTE::operator BYTE()
 {
-    BYTE tmp = eeprom_read_byte(&new_value.address);
-    eeprom_write_byte(&address, tmp);
+    return eeprom_read_byte(&data);
 }
 //-----------------------------------------------------------------------------
-EEBYTE* EEBYTE::operator & ()
+BYTE _EEBYTE::operator++(const int)
 {
-    return (EEBYTE*) &address;
-}
-//-----------------------------------------------------------------------------
-EEBYTE::operator BYTE()
-{
-    return eeprom_read_byte(&address);
-}
-//-----------------------------------------------------------------------------
-bool EEBYTE::operator == (const BYTE cmp_value)
-{
-    BYTE tmp = eeprom_read_byte(&address);
-    return (tmp == cmp_value);
-}
-//-----------------------------------------------------------------------------
-BYTE EEBYTE::operator++(const int)
-{
-    BYTE tmp = eeprom_read_byte(&address);
-    tmp++;
-    eeprom_write_byte(&address, tmp);
+    BYTE tmp = eeprom_read_byte(&data) + 1;
+    eeprom_write_byte(&data, tmp);
     return tmp;
 }
 //-----------------------------------------------------------------------------
-BYTE EEBYTE::operator--(const int)
+BYTE _EEBYTE::operator--(const int)
 {
-    BYTE tmp = eeprom_read_byte(&address);
-    tmp--;
-    eeprom_write_byte(&address, tmp);
+    BYTE tmp = eeprom_read_byte(&data) - 1;
+    eeprom_write_byte(&data, tmp);
     return tmp;
 }
 //-----------------------------------------------------------------------------
-BYTE EEBYTE::operator += (const BYTE& value)
+BYTE _EEBYTE::operator += (const BYTE& value)
 {
-    BYTE tmp = eeprom_read_byte(&address);
-    tmp += value;;
-    eeprom_write_byte(&address, tmp);
+    BYTE tmp = eeprom_read_byte(&data) + value;
+    eeprom_write_byte(&data, tmp);
     return tmp;
 }
 //-----------------------------------------------------------------------------
-BYTE EEBYTE::operator -= (const BYTE& value)
+BYTE _EEBYTE::operator -= (const BYTE& value)
 {
-    BYTE tmp = eeprom_read_byte(&address);
-    tmp -= value;;
-    eeprom_write_byte(&address, tmp);
+    BYTE tmp = eeprom_read_byte(&data) - value;
+    eeprom_write_byte(&data, tmp);
     return tmp;
 }
+
+
 //=============================================================================
 //===============================  EEWORD  ====================================
 //=============================================================================
-void EEWORD::operator = (const WORD& new_value)
+void _EEWORD::operator = (const _EEWORD& new_value)
 {
-    eeprom_write_word(&address, new_value);
+    DWORD tmp = eeprom_read_word(&new_value.data);
+    eeprom_write_word(&data, tmp);
 }
 //-----------------------------------------------------------------------------
-void EEWORD::operator = (const int& new_value)
+_EEWORD* _EEWORD::operator & ()
 {
-    eeprom_write_word(&address, (BYTE) new_value);
+    return (_EEWORD*) &data;
 }
 //-----------------------------------------------------------------------------
-void EEWORD::operator = (const EEWORD& new_value)
+WORD _EEWORD::operator++(const int)
 {
-    DWORD tmp = eeprom_read_word(&new_value.address);
-    eeprom_write_word(&address, tmp);
-}
-//-----------------------------------------------------------------------------
-EEWORD* EEWORD::operator & ()
-{
-    return (EEWORD*) &address;
-}
-//-----------------------------------------------------------------------------
-WORD EEWORD::operator++(const int)
-{
-    WORD tmp = eeprom_read_word(&address);
-    tmp++;
-    eeprom_write_word(&address, tmp);
+    WORD tmp = eeprom_read_word(&data) + 1;
+    eeprom_write_word(&data, tmp);
     return tmp;
 }
 //-----------------------------------------------------------------------------
-WORD EEWORD::operator--(const int)
+WORD _EEWORD::operator--(const int)
 {
-    WORD tmp = eeprom_read_word(&address);
-    tmp++;
-    eeprom_write_word(&address, tmp);
+    WORD tmp = eeprom_read_word(&data) + 1;
+    eeprom_write_word(&data, tmp);
     return tmp;
 }
 //-----------------------------------------------------------------------------
-EEWORD::operator WORD()
+_EEWORD::operator WORD()
 {
-    return eeprom_read_word(&address);
+    return eeprom_read_word(&data);
 }
 //-----------------------------------------------------------------------------
-bool EEWORD::operator == (const WORD& cmp_value)
+bool _EEWORD::operator == (const WORD& cmp_value)
 {
-    WORD tmp = eeprom_read_word(&address);
+    WORD tmp = eeprom_read_word(&data);
     return (tmp == cmp_value);
 }
 //-----------------------------------------------------------------------------
-WORD EEWORD::operator += (const WORD& value)
+WORD _EEWORD::operator += (const WORD& value)
 {
-    WORD tmp = eeprom_read_word(&address);
-    tmp += value;;
-    eeprom_write_word(&address, tmp);
+    WORD tmp = eeprom_read_word(&data) + value;
+    eeprom_write_word(&data, tmp);
     return tmp;
 }
 //-----------------------------------------------------------------------------
-WORD EEWORD::operator -= (const WORD& value)
+WORD _EEWORD::operator -= (const WORD& value)
 {
-    WORD tmp = eeprom_read_word(&address);
-    tmp -= value;;
-    eeprom_write_word(&address, tmp);
+    WORD tmp = eeprom_read_word(&data) - value;
+    eeprom_write_word(&data, tmp);
     return tmp;
 }
+
+
 //=============================================================================
 //==============================  EEDWORD  ====================================
 //=============================================================================
-void EEDWORD::operator = (const DWORD& new_value)
+_EEDWORD* _EEDWORD::operator & ()
 {
-    eeprom_write_dword(&address,new_value);
+    return (_EEDWORD*) &data;
 }
 //-----------------------------------------------------------------------------
-void EEDWORD::operator = (const WORD& new_value)
+DWORD _EEDWORD::operator ++ (const int)
 {
-    DWORD tmp=new_value;
-    eeprom_write_dword(&address,tmp);
-}
-//-----------------------------------------------------------------------------
-void EEDWORD::operator = (const int& new_value)
-{
-    DWORD tmp=new_value;
-    eeprom_write_dword(&address,tmp);
-}
-//-----------------------------------------------------------------------------
-void EEDWORD::operator = (const long int& new_value)
-{
-    DWORD tmp=new_value;
-    eeprom_write_dword(&address,tmp);
-}
-//-----------------------------------------------------------------------------
-void EEDWORD::operator = (const EEDWORD& new_value)
-{
-    DWORD tmp=eeprom_read_dword(&new_value.address);
-    eeprom_write_dword(&address,tmp);
-}
-//-----------------------------------------------------------------------------
-EEDWORD* EEDWORD::operator & ()
-{
-    return (EEDWORD*)&address;
-}
-//-----------------------------------------------------------------------------
-DWORD EEDWORD::operator ++ (const int)
-{
-    DWORD tmp=eeprom_read_dword(&address);
-    tmp++;
-    eeprom_write_dword(&address,tmp);
+    DWORD tmp = eeprom_read_dword(&data) + 1;
+    eeprom_write_dword(&data, tmp);
     return tmp;
 }
 //-----------------------------------------------------------------------------
-DWORD EEDWORD::operator -- (const int)
+DWORD _EEDWORD::operator -- (const int)
 {
-    DWORD tmp=eeprom_read_dword(&address);
-    tmp++;
-    eeprom_write_dword(&address,tmp);
+    DWORD tmp = eeprom_read_dword(&data) - 1;
+    eeprom_write_dword(&data, tmp);
     return tmp;
 }
 //-----------------------------------------------------------------------------
-DWORD EEDWORD::operator += (const DWORD& value)
+DWORD _EEDWORD::operator += (const DWORD& value)
 {
-    DWORD tmp=eeprom_read_dword(&address);
-    tmp+=value;
-    eeprom_write_dword(&address,tmp);
+    DWORD tmp = eeprom_read_dword(&data) + value;
+    eeprom_write_dword(&data, tmp);
     return tmp;
 }
 //-----------------------------------------------------------------------------
-DWORD EEDWORD::operator -= (const DWORD& value)
+DWORD _EEDWORD::operator -= (const DWORD& value)
 {
-    DWORD tmp = eeprom_read_dword(&address);
-    tmp -= value;
-    eeprom_write_dword(&address, tmp);
+    DWORD tmp = eeprom_read_dword(&data) - value;
+    eeprom_write_dword(&data, tmp);
     return tmp;
 }
 //-----------------------------------------------------------------------------
-EEDWORD::operator DWORD()
+_EEDWORD::operator DWORD()
 {
-    return eeprom_read_dword(&address);
+    return eeprom_read_dword(&data);
+}
+
+
+//=============================================================================
+//==============================  EEQWORD  ====================================
+//=============================================================================
+QWORD _EEQWORD::eeprom_read_qword(const QWORD* ptr)
+{
+    BYTE* addr = (BYTE*) ptr;
+    QWORD_UNION val;
+    for(BYTE i = 0; i < 8; i++)
+    {
+        val.byte[i] = eeprom_read_byte(addr++);
+    }
+    return val.data;
 }
 //-----------------------------------------------------------------------------
+void _EEQWORD::eeprom_write_qword(QWORD* ptr, const QWORD& value)
+{
+    BYTE* addr = (BYTE*) &ptr;
+    QWORD_UNION val;
+    val.data = value;
+    for(BYTE i = 0; i < 8; i++)
+    {
+        eeprom_write_byte(addr++, val.byte[i]);
+    }
+}
+//-----------------------------------------------------------------------------
+void _EEQWORD::operator = (const _EEQWORD& new_value)
+{
+    QWORD tmp = eeprom_read_qword(&new_value.data);
+    eeprom_write_qword(&data, tmp);
+}
+//-----------------------------------------------------------------------------
+_EEQWORD* _EEQWORD::operator & ()
+{
+    return (_EEQWORD*)&data;
+}
+//-----------------------------------------------------------------------------
+DWORD _EEQWORD::operator ++ (const int)
+{
+    QWORD tmp = eeprom_read_qword(&data) + 1;
+    eeprom_write_qword(&data, tmp);
+    return tmp;
+}
+//-----------------------------------------------------------------------------
+DWORD _EEQWORD::operator -- (const int)
+{
+    QWORD tmp = eeprom_read_qword(&data) - 1;
+    eeprom_write_qword(&data, tmp);
+    return tmp;
+}
+//-----------------------------------------------------------------------------
+DWORD _EEQWORD::operator += (const DWORD& value)
+{
+    QWORD tmp = eeprom_read_qword(&data) + value;
+    eeprom_write_qword(&data, tmp);
+    return tmp;
+}
+//-----------------------------------------------------------------------------
+DWORD _EEQWORD::operator -= (const DWORD& value)
+{
+    QWORD tmp = eeprom_read_qword(&data) - value;
+    eeprom_write_qword(&data, tmp);
+    return tmp;
+}
+//-----------------------------------------------------------------------------
+_EEQWORD::operator QWORD()
+{
+    return eeprom_read_qword(&data);
+}
+//-----------------------------------------------------------------------------
+
+
