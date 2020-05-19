@@ -15,9 +15,10 @@
 #define KHZ     1000
 #define MHZ     1000000ULL
 //-----------------------------------------------------------------------------
-typedef unsigned char BYTE;
-typedef unsigned int WORD;
-typedef unsigned long DWORD;
+typedef unsigned char       BYTE;
+typedef unsigned int        WORD;
+typedef unsigned long       DWORD;
+typedef unsigned long long  QWORD;
 //-----------------------------------------------------------------------------
 union WORD_UNION
 {
@@ -30,6 +31,14 @@ union DWORD_UNION
     DWORD data;
     WORD word[2];
     BYTE byte[4];
+};
+//-----------------------------------------------------------------------------
+union QWORD_UNION
+{
+    QWORD data;
+    DWORD dword[2];
+    WORD word[4];
+    BYTE byte[8];
 };
 //-----------------------------------------------------------------------------
 #endif
