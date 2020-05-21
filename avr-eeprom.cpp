@@ -36,6 +36,12 @@ BYTE _EEBYTE::operator--(const int)
     return tmp;
 }
 //-----------------------------------------------------------------------------
+bool _EEBYTE::operator == (const int cmp_value)
+{
+    BYTE tmp = eeprom_read_byte(&data);
+    return (tmp == (BYTE) cmp_value);
+}
+//-----------------------------------------------------------------------------
 BYTE _EEBYTE::operator += (const BYTE& value)
 {
     BYTE tmp = eeprom_read_byte(&data) + value;
@@ -49,6 +55,7 @@ BYTE _EEBYTE::operator -= (const BYTE& value)
     eeprom_write_byte(&data, tmp);
     return tmp;
 }
+
 
 
 //=============================================================================
@@ -84,10 +91,10 @@ _EEWORD::operator WORD()
     return eeprom_read_word(&data);
 }
 //-----------------------------------------------------------------------------
-bool _EEWORD::operator == (const WORD& cmp_value)
+bool _EEWORD::operator == (const int cmp_value)
 {
     WORD tmp = eeprom_read_word(&data);
-    return (tmp == cmp_value);
+    return (tmp == (WORD) cmp_value);
 }
 //-----------------------------------------------------------------------------
 WORD _EEWORD::operator += (const WORD& value)
@@ -163,7 +170,7 @@ QWORD _EEQWORD::eeprom_read_qword(const QWORD* ptr)
 //-----------------------------------------------------------------------------
 void _EEQWORD::eeprom_write_qword(QWORD* ptr, const QWORD& value)
 {
-    BYTE* addr = (BYTE*) &ptr;
+    BYTE* addr = (BYTE*) ptr;
     QWORD_UNION val;
     val.data = value;
     for(BYTE i = 0; i < 8; i++)
