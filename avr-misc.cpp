@@ -1,6 +1,5 @@
 //-----------------------------------------------------------------------------
 #include <stdlib.h>
-#include "../avr-debug/debug.h"
 #include "avr-misc.h"
 //-----------------------------------------------------------------------------
 unsigned char _sreg;
@@ -26,7 +25,6 @@ void BYTEstack::push(BYTE value)
     if(!m_buf)
     {
         // not enough memory space to enlarge stack
-        DSTR("LO_MEM");
         halt();
     }
     m_buf[m_count++] = value;
