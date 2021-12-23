@@ -10,8 +10,8 @@
 #define max(a,b) (a > b) ? a : b
 #define min(a,b) (a < b) ? a : b
 
-#define __EXTENSION    7,6,5,4,3,2,1,0
-#define __GET8(_0,_1,_2,_3,_4,_5,_6,_7,N,...) N
+#define __EXTENSION    8,7,6,5,4,3,2,1,0
+#define __GET8(_0,_1,_2,_3,_4,_5,_6,_7,_8,N,...) N
 #define __GET_SIZE(...) __GET8(__VA_ARGS__)
 #define __VA_SIZE(...) __GET_SIZE(_,##__VA_ARGS__,__EXTENSION)
 
@@ -22,6 +22,7 @@
 #define _BITS5(b1,...) _bit(b1) | _BITS4(__VA_ARGS__)
 #define _BITS6(b1,...) _bit(b1) | _BITS5(__VA_ARGS__)
 #define _BITS7(b1,...) _bit(b1) | _BITS6(__VA_ARGS__)
+#define _BITS8(b1,...) _bit(b1) | _BITS7(__VA_ARGS__)
 #define _BITS(...)  CONCAT(_BITS,__VA_SIZE(__VA_ARGS__))(__VA_ARGS__)
 
 #define _bit(b) (1 << (b))
