@@ -8,6 +8,7 @@
 #include "avr-interrupts.h"
 #include "avr-delay.h"
 #include "avr-eeprom.h"
+#include "avr-GPIO.h"
 //-----------------------------------------------------------------------------
 class BYTEstack
 {
